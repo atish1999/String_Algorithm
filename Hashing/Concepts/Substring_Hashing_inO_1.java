@@ -1,4 +1,5 @@
-package Hashing.Concepts;
+package Concepts;
+
 import java.util.*;
 import java.io.*;
 
@@ -68,40 +69,44 @@ public class Substring_Hashing_inO_1 implements Runnable {
 	}
 
 	static int mod = (int) (1e9 + 7);
-	static long dp[],prime=31,i_power[];
+	static long dp[], prime = 31, i_power[];
+
 	public static void main(String[] args) throws java.lang.Exception {
 		new Thread(null, new Substring_Hashing_inO_1(), "Main", 1 << 26).start();
 	}
 
 	static void rolling_hash(String s) {
-		long value=0;
-		long power=1;
-		for(int i=0; i<s.length(); i++) {
-			value=(value+(s.charAt(i)-'a'+1)*power)%mod;
-			dp[i]=value;
-			i_power[i]=power;
-			power=(power*prime)%mod;
+		long value = 0;
+		long power = 1;
+		for (int i = 0; i < s.length(); i++) {
+			value = (value + (s.charAt(i) - 'a' + 1) * power) % mod;
+			dp[i] = value;
+			i_power[i] = power;
+			power = (power * prime) % mod;
 		}
 	}
-	static long sub_hash_value(int l,int r) {
-		long res=dp[r];
-		if(l!=0) res-=dp[l-1];
-		return res/i_power[l];
+
+	static long sub_hash_value(int l, int r) {
+		long res = dp[r];
+		if (l != 0)
+			res -= dp[l - 1];
+		return res / i_power[l];
 	}
+
 	@Override
 	public void run() {
 		long start = System.nanoTime(); // Program Start
 		FastReader fr = new FastReader();
-		String o=fr.nextLine();
-		dp=new long[o.length()];
-		i_power=new long[o.length()];
+		String o = fr.nextLine();
+		dp = new long[o.length()];
+		i_power = new long[o.length()];
 		rolling_hash(o);
 //		System.out.println(dp[o.length()-1]);
 		int t = fr.nextInt();
 		while (t-- > 0) {
-			int l=fr.nextInt(),r=fr.nextInt();
-			System.out.println(sub_hash_value(l,r));
-			
+			int l = fr.nextInt(), r = fr.nextInt();
+			System.out.println(sub_hash_value(l, r));
+
 		}
 		long end = System.nanoTime(); // Program End
 		System.err.println("Time taken: " + (end - start) / 1000000 + " ms");
@@ -161,7 +166,7 @@ public class Substring_Hashing_inO_1 implements Runnable {
 
 		static long gcd(long a, long b) {// here b is the remainder
 			if (b == 0)
-				return a; //because each time b will divide a.
+				return a; // because each time b will divide a.
 			return gcd(b, a % b);
 		}
 
@@ -173,7 +178,7 @@ public class Substring_Hashing_inO_1 implements Runnable {
 			return (bits >> (i - 1)) & 1;
 		}
 
-		static int upper_Bound(int a[], int x) {//closest to the left+1
+		static int upper_Bound(int a[], int x) {// closest to the left+1
 			int l = -1, r = a.length;
 			while (l + 1 < r) {
 				int m = (l + r) >>> 1;
@@ -185,7 +190,7 @@ public class Substring_Hashing_inO_1 implements Runnable {
 			return l + 1;
 		}
 
-		static int lower_Bound(int a[], int x) {//closest to the right
+		static int lower_Bound(int a[], int x) {// closest to the right
 			int l = -1, r = a.length;
 			while (l + 1 < r) {
 				int m = (l + r) >>> 1;
@@ -215,4 +220,3 @@ public class Substring_Hashing_inO_1 implements Runnable {
 	}
 
 }
-

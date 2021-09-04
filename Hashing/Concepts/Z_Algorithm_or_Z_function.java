@@ -1,7 +1,7 @@
-package Hashing.Concepts;
+package Concepts;
 
 /*
-								"जय श्री कृष्णा"
+								"à¤œà¤¯ à¤¶à¥�à¤°à¥€ à¤•à¥ƒà¤·à¥�à¤£à¤¾"
 */
 import java.util.*;
 import java.io.*;

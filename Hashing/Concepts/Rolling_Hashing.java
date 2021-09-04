@@ -1,4 +1,4 @@
-package Hashing.Concepts;
+package Concepts;
 
 import java.util.*;
 import java.io.*;
